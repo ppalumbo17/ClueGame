@@ -14,11 +14,13 @@ private IntBoard board;
 	public void setUp(){
 		board = new IntBoard(4,4);
 	}
-	@Test
+	
+	/*@Test
 	public void test() {
 		fail("Not yet implemented");
 	}
-
+	*/
+	
 	//Adjacency Tests
 	//
 	//
@@ -150,10 +152,14 @@ private IntBoard board;
 		BoardCell cell = board.getCell(2, 2);
 		board.calcTargets(cell, 3);
 		Set targets = board.getTargets();
-		Assert.assertEquals(4, targets.size());
+		Assert.assertEquals(8, targets.size());
+		Assert.assertTrue(targets.contains(board.getCell(0, 1)));
+		Assert.assertTrue(targets.contains(board.getCell(0, 3)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 0)));
+		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 1)));
 		Assert.assertTrue(targets.contains(board.getCell(2, 3)));
-		Assert.assertTrue(targets.contains(board.getCell(1, 2)));
+		Assert.assertTrue(targets.contains(board.getCell(3, 0)));
 		Assert.assertTrue(targets.contains(board.getCell(3, 2)));
 	}
 	

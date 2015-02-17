@@ -60,8 +60,25 @@ public class IntBoard {
 			adjMtx.get(currentCell).add(boardMap[currentCell.getRow()][currentCell.getColumn() - 1]);
 		}
 	}
+	
 	public void calcTargets(BoardCell cell, int diceRoll){
-		for(BoardCell x:adjMtx.get(cell)){
+		visited.add(cell);
+		findAllTargets(cell, diceRoll);
+	}
+	
+	public void findAllTargets(BoardCell cell, int numSteps){
+		LinkedList<BoardCell> adjacentCells = new LinkedList<BoardCell>(adjMtx.get(cell));
+		for(BoardCell x:adjacentCells){
+			if(!visited.contains(x)){
+				
+				visited.add(x);
+				if(numSteps == 1){
+					targets.add(x);
+				}else{
+					findAllTargets(x, numSteps -1);
+				}
+				visited.remove(x);
+			}
 			
 		}
 	}
@@ -69,6 +86,7 @@ public class IntBoard {
 	public Set<BoardCell> getTargets(){
 		return targets;
 	}
+	
 	public LinkedList<BoardCell> getAdjList(BoardCell cell){
 		return new LinkedList<BoardCell>(adjMtx.get(cell));
 	}
