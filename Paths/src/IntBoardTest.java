@@ -1,12 +1,12 @@
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.fail;
 
 import java.util.LinkedList;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.*
-;
 public class IntBoardTest {
 private IntBoard board;
 
