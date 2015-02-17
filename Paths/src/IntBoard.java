@@ -14,8 +14,11 @@ public class IntBoard {
 		this.numColumns = column;
 		adjMtx = new HashMap<BoardCell, LinkedList<BoardCell>>();
 		boardMap = new BoardCell[numRows][numColumns];
+		visited = new HashSet<BoardCell>();
+		targets = new HashSet<BoardCell>();
 		initializeBoard();
 	}
+	
 	public void initializeBoard(){
 		//
 		// PLACEHOLDER FOR TESTS -- NOT FINAL
@@ -25,10 +28,19 @@ public class IntBoard {
 				boardMap[i][j] = new BoardCell(i,j);
 			}
 		}
+		
+		for(int i = 0;i < numRows; i++){
+			for(int j = 0; j< numColumns; j++){
+				calcAdjacencies(boardMap[i][j]);
+			}
+		}
+		
 	}
+	
 	public BoardCell getCell(int row, int col){
 		return boardMap[row][col];
 	}
+	
 	public void calcAdjacencies(BoardCell currentCell){
 		adjMtx.put(currentCell, new LinkedList<BoardCell>());
 		//checks the cell above currentCell
@@ -49,14 +61,15 @@ public class IntBoard {
 		}
 	}
 	public void calcTargets(BoardCell cell, int diceRoll){
-		
+		for(BoardCell x:adjMtx.get(cell)){
+			
+		}
 	}
+	
 	public Set<BoardCell> getTargets(){
-		Set<BoardCell> board = new HashSet<BoardCell>();
-		return board;
+		return targets;
 	}
 	public LinkedList<BoardCell> getAdjList(BoardCell cell){
-		calcAdjacencies(cell);
 		return new LinkedList<BoardCell>(adjMtx.get(cell));
 	}
 	
