@@ -63,8 +63,52 @@ public class clueBoardTests {
 	
 	@Test
 	public void testDoorDirections(){
-		RoomCell room = board.getRoomCellAt(2,5);
+		RoomCell room = board.getRoomCellAt(2, 5);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
+		room = board.getRoomCellAt(6, 9);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
+		room = board.getRoomCellAt(7, 16);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
+		room = board.getRoomCellAt(5, 21);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
+		room = board.getRoomCellAt(9, 21);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
+		room = board.getRoomCellAt(12, 7);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
+		room = board.getRoomCellAt(11, 18);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
+		room = board.getRoomCellAt(13, 7);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
+		room = board.getRoomCellAt(12, 18);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
+		room = board.getRoomCellAt(15, 5);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
+		room = board.getRoomCellAt(16, 12);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
+		room = board.getRoomCellAt(19, 6);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
+		room = board.getRoomCellAt(18, 16);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
+		room = board.getRoomCellAt(18, 20);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
 	}
+		
+		
+		
 	
 
 }

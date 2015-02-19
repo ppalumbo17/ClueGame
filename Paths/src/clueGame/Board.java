@@ -12,8 +12,8 @@ public class Board {
 	public void loadBoardConfig(){
 		
 	}
-	public BoardCell getRoomCellAt(int row, int col){
-		return boardLayout[row][col];
+	public RoomCell getRoomCellAt(int row, int col){
+		return new RoomCell(row, col);
 	}
 
 	public BoardCell[][] getBoardLayout() {
