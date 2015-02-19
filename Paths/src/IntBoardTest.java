@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 public class IntBoardTest {
 private IntBoard board;
-
+	
 	@Before
 	public void setUp(){
 		board = new IntBoard(4,4);
