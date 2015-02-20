@@ -10,9 +10,13 @@ public class ClueGame {
 	public ClueGame(String config, String legend){
 		this.config = config;
 		this.legend = legend;
+		gameboard = new Board();
+		
 	}
 	public void loadConfigFiles(){
-		
+		gameboard.loadBoardConfig();
+		gameboard.loadCharacterConfig();
+		gameboard.loadWeaponConfig();
 	}
 	
 	public Board getBoard(){

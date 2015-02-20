@@ -27,6 +27,8 @@ public class clueBoardTests {
 	@Before
 	public void setUp(){
 		ClueGame game = new ClueGame("ClueGameConfigFile.csv", "legend.txt");
+		game.loadConfigFiles();
+		board = game.getBoard();
 	}
 	/*@Test
 	public void testRooms() {
