@@ -3,8 +3,8 @@ import java.util.*;
 
 
 public class Board {
-
-	private BoardCell[][] boardLayout;
+	private static int MAX_CELLS = 50;
+	private BoardCell[][] boardLayout = new BoardCell[MAX_CELLS][MAX_CELLS];
 	private Map<Character, String> rooms;
 	private int numRows, numColumns;
 	
@@ -13,7 +13,11 @@ public class Board {
 		
 	}
 	public RoomCell getRoomCellAt(int row, int col){
-		return new RoomCell(row, col);
+		BoardCell cell = boardLayout[row][col];
+		if(cell.isRoom()){
+			return(RoomCell) cell;
+		}
+		return null;
 	}
 
 	public BoardCell[][] getBoardLayout() {

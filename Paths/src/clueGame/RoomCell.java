@@ -10,6 +10,7 @@ public class RoomCell extends BoardCell{
 		super(row, column);
 		// TODO Auto-generated constructor stub
 	}
+
 	public boolean isRoom(){
 		return true;
 	}
