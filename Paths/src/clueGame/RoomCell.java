@@ -12,25 +12,35 @@ public class RoomCell extends BoardCell{
 		switch(direction){
 		case('U'):
 			doorDirection = DoorDirection.UP;
+			break;
 		case('D'):
 			doorDirection = DoorDirection.DOWN;
+			break;
 		case('R'):
 			doorDirection = DoorDirection.RIGHT;
+			break;
 		case('L'):
 			doorDirection = DoorDirection.LEFT;
+			break;
 		case('N'):
 			doorDirection = DoorDirection.NONE;
+			break;
 		}
 	}
 
 	public boolean isRoom(){
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "RoomCell [doorDirection=" + doorDirection + "]";
+	}
+
 	public DoorDirection getDoorDirection(){
 		return doorDirection;
 	}
 	
-	public boolean isDoor(){
+	public boolean isDoorway(){
 		if(doorDirection != DoorDirection.NONE){
 			return true;
 		}else{

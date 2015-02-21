@@ -9,25 +9,39 @@ public class ClueGame {
 	private Board gameboard;
 	private String config;
 	private String legend;
+	private boolean roomsLoaded = false;
 	
 	public ClueGame(String config, String legend){
 		this.config = config;
 		this.legend = legend;
 		rooms = new HashMap<Character,String>();
 		gameboard = new Board();
+		gameboard.setConfig(config);
 		
 	}
 	public ClueGame() {
 		config = "ClueLayout.csv";
 		legend = "ClueLegend.txt";
 		gameboard = new Board();
+		gameboard.setConfig(config);
 	}
 	public void loadConfigFiles(){
-		gameboard.setConfig(config);
-		//gameboard.setRooms(rooms);
+		
+		if(!roomsLoaded){
+			try{
+				loadRoomConfig();
+			}catch(BadConfigFormatException e){
+				System.out.println(e.getLocalizedMessage());
+			}
+		}
+		
+		
+		
 		try{
 			gameboard.loadBoardConfig();
 		}catch(BadConfigFormatException e){
+			System.out.println(e.getLocalizedMessage());
+		}catch(FileNotFoundException e){
 			System.out.println(e.getLocalizedMessage());
 		}
 		
@@ -61,7 +75,7 @@ public class ClueGame {
 		
 		in.close();
 		
-		
+		gameboard.setRooms(rooms);
 		
 	}
 	

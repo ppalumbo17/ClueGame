@@ -19,7 +19,7 @@ public class Board {
 	}
 	
 	
-	public void loadBoardConfig() throws BadConfigFormatException{
+	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
 		FileReader reader = null;
 		Scanner in = null;
 		String[] temp;
@@ -28,7 +28,7 @@ public class Board {
 			reader = new FileReader(config);
 			in = new Scanner(reader);
 		}catch (FileNotFoundException e){
-			System.out.println(e.getLocalizedMessage());
+			throw new FileNotFoundException();
 		}
 		
 		while(in.hasNextLine()){
@@ -36,12 +36,12 @@ public class Board {
 			layout.add(temp);
 			
 		}
+		in.close();
 		
 		numRows = layout.size();
 		numColumns = layout.get(0).length;
 		boardLayout = new BoardCell[numRows][numColumns];
 		
-		System.out.println(layout.get(0)[0].charAt(0));
 		
 		//Checking if missing any Columns in any row
 		for(String[] x:layout){
@@ -61,7 +61,7 @@ public class Board {
 					throw new BadConfigFormatException("Error - Incorrect config format (Incorrect Room initial)");
 				}
 				if(layout.get(i)[j].length() > 1){
-					if(!layout.get(i)[j].matches(".[UDLR]")){
+					if(!layout.get(i)[j].matches(".[UDLRN]")){
 						throw new BadConfigFormatException("Error - Incorrect config format (Incorrect Door Direction)");
 					}
 				}
@@ -115,7 +115,7 @@ public class Board {
 
 
 	public Map<Character, String> getRooms() {
-		return new HashMap<Character,String>();
+		return rooms;
 	}
 
 
