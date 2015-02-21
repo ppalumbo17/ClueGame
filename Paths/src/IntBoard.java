@@ -64,7 +64,6 @@ public class IntBoard {
 	public void calcTargets(BoardCell cell, int diceRoll){
 		visited.add(cell);
 		findAllTargets(cell, diceRoll);
-		visited.clear();
 	}
 	
 	public void findAllTargets(BoardCell cell, int numSteps){
