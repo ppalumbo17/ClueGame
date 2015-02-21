@@ -1,9 +1,12 @@
 package clueGame;
+import BoardCell;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
 import clueGame.RoomCell.DoorDirection;
+import clueTests.LinkedList;
 
 
 public class Board {
@@ -13,6 +16,9 @@ public class Board {
 	private String config;
 	private int numRows;
 	private int numColumns;
+	private Map<BoardCell, LinkedList<BoardCell>> adjMtx;
+	private Set<BoardCell> visited;
+	private Set<BoardCell> targets;
 	
 	public Board(){
 		
@@ -126,6 +132,12 @@ public class Board {
 
 	public int getNumColumns() {
 		return numColumns;
+	}
+
+
+	public LinkedList<BoardCell> getAdjList(int i, int j) {
+		// TODO Auto-generated method stub
+		return new LinkedList<BoardCell>();
 	}
 	
 }
