@@ -22,6 +22,7 @@ public class ClueGame {
 	public ClueGame() {
 		config = "ClueLayout.csv";
 		legend = "ClueLegend.txt";
+		rooms = new HashMap<Character, String>();
 		gameboard = new Board();
 		gameboard.setConfig(config);
 	}
