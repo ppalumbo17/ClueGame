@@ -90,7 +90,7 @@ public class Board {
 			}
 		}
 		//Forms Adj Mtx
-		calcAdjMtx();
+		//calcAdjMtx();
 		
 	}
 	
@@ -147,7 +147,7 @@ public class Board {
 
 	//PLACEHOLDERS -REPLACE FOR PART III
 	
-	public void calcAdjacencies(BoardCell cell){
+	public void calcAdjacenciesHelp(BoardCell cell){
 		//adjMtx.put(cell, new LinkedList<BoardCell>());
 		int adjRow = cell.getRow();
 		int adjColumn = cell.getColumn();
@@ -167,7 +167,7 @@ public class Board {
 				case LEFT:
 					adjList.add(boardLayout[adjRow][adjColumn-1]);
 					break;	
-				case NONE:
+				default:
 					break;
 			}
 		}
@@ -202,16 +202,20 @@ public class Board {
 	
 	public void calcTargets(int row, int column, int diceRoll){
 		BoardCell cell = boardLayout[row][column];
-		visited = new HashSet<BoardCell>();
+		visited.clear();
+		targets.clear();
+		//visited = new HashSet<BoardCell>();
 		findTargets(cell, diceRoll);
 	}
 	//Believe this only works for one
 		public void findTargets(BoardCell cell, int steps){
+			visited.add(cell);
 			LinkedList<BoardCell> adjacentCells = new LinkedList<BoardCell>(adjMtx.get(cell));
+			adjacentCells.removeAll(visited);
 			for(BoardCell x: adjacentCells){
 				if(!visited.contains(x)){
 					visited.add(x);
-					if(steps == 1){
+					if(steps == 1 || x.isDoorway()){
 						targets.add(x);
 					}else{
 						findTargets(x, steps-1);
@@ -222,17 +226,19 @@ public class Board {
 		}
 	
 	public LinkedList<BoardCell> getAdjList(int i, int j) {
-		BoardCell currentCell = boardLayout[i][j];
-		return adjMtx.get(currentCell);
+		return adjMtx.get(getCellAt(i, j));
 	}
 	
 	//fills the Adjacency Matrix
-	public void calcAdjMtx(){
+	public void calcAdjacencies(){
 		for(int i=0;i<numRows;i++){
 			for(int j=0;j<numColumns;j++){
-				calcAdjacencies(boardLayout[i][j]);
+				calcAdjacenciesHelp(getCellAt(i, j));
 			}
 		}
+	}
+	public Set<BoardCell> getTargets(){
+		return targets;
 	}
 	/*
 	//Helper that calculates adjacencies for a single cell
@@ -318,9 +324,7 @@ public class Board {
 	}
 	*/
 	
-	public Set<BoardCell> getTargets(){
-		return targets;
-	}
+	
 	
 	
 	

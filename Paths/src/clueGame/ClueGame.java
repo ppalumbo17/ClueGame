@@ -83,4 +83,8 @@ public class ClueGame {
 	public Board getBoard(){
 		return gameboard;
 	}
+	
+	public Map<Character, String> getRooms(){
+		return rooms;
+	}
 }
