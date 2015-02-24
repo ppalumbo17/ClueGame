@@ -86,8 +86,11 @@ public class Board {
 					boardLayout[i][j] = new RoomCell(i,j,layout.get(i)[j].charAt(0),'N');
 
 				}
+			
 			}
 		}
+		//Forms Adj Mtx
+		calcAdjMtx();
 		
 	}
 	
@@ -143,33 +146,95 @@ public class Board {
 	
 
 	//PLACEHOLDERS -REPLACE FOR PART III
-	public LinkedList<BoardCell> getAdjList(int i, int j) {
-		return new LinkedList<BoardCell>();
-	}
 	
-	public void calcAdjacencies(){
+	public void calcAdjacencies(BoardCell cell){
+		//adjMtx.put(cell, new LinkedList<BoardCell>());
+		int adjRow = cell.getRow();
+		int adjColumn = cell.getColumn();
+		LinkedList<BoardCell> adjList = new LinkedList<BoardCell>();
 		
+		if(cell.isDoorway()){
+			switch(((RoomCell)cell).getDoorDirection()){
+				case UP:
+					adjList.add(boardLayout[adjRow-1][adjColumn]);
+					break;
+				case DOWN:
+					adjList.add(boardLayout[adjRow+1][adjColumn]);					
+					break;
+				case RIGHT:
+					adjList.add(boardLayout[adjRow][adjColumn+1]);
+					break;
+				case LEFT:
+					adjList.add(boardLayout[adjRow][adjColumn-1]);
+					break;	
+				case NONE:
+					break;
+			}
+		}
+		else{
+			//check left
+			if(adjColumn > 0){
+				if(boardLayout[adjRow][adjColumn-1].isWalkway() || ((RoomCell)boardLayout[adjRow][adjColumn-1]).getDoorDirection() == RoomCell.DoorDirection.RIGHT){
+					adjList.add(boardLayout[adjRow][adjColumn-1]);
+				}
+			}
+			//check right
+			if(adjColumn < numColumns){
+				if(boardLayout[adjRow][adjColumn+1].isWalkway()|| ((RoomCell)boardLayout[adjRow][adjColumn+1]).getDoorDirection() == RoomCell.DoorDirection.LEFT){
+					adjList.add(boardLayout[adjRow][adjColumn+1]);
+				}
+			}
+			//check up
+			if(adjRow > 0){
+				if(boardLayout[adjRow-1][adjColumn].isWalkway()|| ((RoomCell)boardLayout[adjRow-1][adjColumn]).getDoorDirection() == RoomCell.DoorDirection.DOWN){
+					adjList.add(boardLayout[adjRow-1][adjColumn]);
+				}
+			}
+			//check down
+			if(adjColumn < numRows){
+				if(boardLayout[adjRow+1][adjColumn].isWalkway()|| ((RoomCell)boardLayout[adjRow][adjColumn+1]).getDoorDirection() == RoomCell.DoorDirection.UP){
+					adjList.add(boardLayout[adjRow+1][adjColumn]);
+				}
+			}
+		}
+		adjMtx.put(cell, adjList);
 	}
 	
 	public void calcTargets(int row, int column, int diceRoll){
-		
+		BoardCell cell = boardLayout[row][column];
+		visited = new HashSet<BoardCell>();
+		findTargets(cell, diceRoll);
 	}
+	//Believe this only works for one
+		public void findTargets(BoardCell cell, int steps){
+			LinkedList<BoardCell> adjacentCells = new LinkedList<BoardCell>(adjMtx.get(cell));
+			for(BoardCell x: adjacentCells){
+				if(!visited.contains(x)){
+					visited.add(x);
+					if(steps == 1){
+						targets.add(x);
+					}else{
+						findTargets(x, steps-1);
+					}
+					visited.remove(x);
+				}
+			}
+		}
 	
-	/*
 	public LinkedList<BoardCell> getAdjList(int i, int j) {
 		BoardCell currentCell = boardLayout[i][j];
 		return adjMtx.get(currentCell);
 	}
 	
 	//fills the Adjacency Matrix
-	public void calcAdjacencies(){
+	public void calcAdjMtx(){
 		for(int i=0;i<numRows;i++){
 			for(int j=0;j<numColumns;j++){
-				calcAdjacency(boardLayout[i][j]);
+				calcAdjacencies(boardLayout[i][j]);
 			}
 		}
 	}
-	
+	/*
 	//Helper that calculates adjacencies for a single cell
 	public void calcAdjacency(BoardCell currentCell){
 		adjMtx.put(currentCell, new LinkedList<BoardCell>());
@@ -256,6 +321,7 @@ public class Board {
 	public Set<BoardCell> getTargets(){
 		return targets;
 	}
+	
 	
 	
 }

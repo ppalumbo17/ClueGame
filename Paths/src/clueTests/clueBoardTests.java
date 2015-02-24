@@ -142,7 +142,7 @@ public class clueBoardTests {
 	//Seen in orange on ClueLayout
 	//
 	@Test
-	public void testAdjacenciesCorner(){
+	public void testRoomAdjacenciesCorner(){
 		
 				// Test a corner
 				LinkedList<BoardCell> testList = board.getAdjList(0, 0);
@@ -152,7 +152,7 @@ public class clueBoardTests {
 	}
 	
 	@Test
-	public void testAdjacenciesWalkwayUnderneath(){
+	public void testRoomAdjacenciesWalkwayUnderneath(){
 				// Test one that has walkway underneath
 				LinkedList<BoardCell> testList = board.getAdjList(14, 2);
 				Assert.assertEquals(0, testList.size());
@@ -160,20 +160,20 @@ public class clueBoardTests {
 	}
 	
 	@Test
-	public void testAdjacenciesWalkwayAbove(){
+	public void testRoomAdjacenciesWalkwayAbove(){
 				// Test one that has walkway above
 				LinkedList<BoardCell> testList = board.getAdjList(15, 12);
 				Assert.assertEquals(0, testList.size());
 				
 	}
 	@Test
-	public void testAdjacenciesMiddleRoom(){
+	public void testRoomAdjacenciesMiddleRoom(){
 				// Test one that is in middle of room
 				LinkedList<BoardCell> testList = board.getAdjList(2, 9);
 				Assert.assertEquals(0, testList.size());
 				
 	}
-	public void testAdjacenciesMiddle(){
+	public void testRoomAdjacenciesMiddle(){
 				// Test one beside a door
 				LinkedList<BoardCell> testList = board.getAdjList(9, 17);
 				Assert.assertEquals(0, testList.size());
@@ -247,8 +247,9 @@ public class clueBoardTests {
 	{
 		// Test on top edge of board, just one walkway piece
 		LinkedList<BoardCell> testList = board.getAdjList(0, 17);
-		Assert.assertTrue(testList.contains(board.getCellAt(0, 18)));
 		Assert.assertEquals(1, testList.size());
+		Assert.assertTrue(testList.contains(board.getCellAt(0, 18)));
+		
 		
 		// Test on left edge of board, three walkway pieces
 		testList = board.getAdjList(15, 0);
