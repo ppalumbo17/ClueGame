@@ -2,7 +2,6 @@ package clueGame;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
-import java.util.regex.Pattern;
 public class ClueGame {
 
 	private Map<Character, String> rooms;
@@ -75,7 +74,7 @@ public class ClueGame {
 		}
 		
 		in.close();
-		
+		roomsLoaded = true;
 		gameboard.setRooms(rooms);
 		
 	}
