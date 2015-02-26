@@ -11,17 +11,18 @@ public class ClueGame {
 	private boolean roomsLoaded = false;
 	
 	public ClueGame(String config, String legend){
+		Init(config, legend);
+		
+	}
+	
+	public ClueGame() {
+		Init("ClueLayout.csv", "ClueLegend.txt");
+	}
+	
+	public void Init(String config, String legend){
 		this.config = config;
 		this.legend = legend;
 		rooms = new HashMap<Character,String>();
-		gameboard = new Board();
-		gameboard.setConfig(config);
-		
-	}
-	public ClueGame() {
-		config = "ClueLayout.csv";
-		legend = "ClueLegend.txt";
-		rooms = new HashMap<Character, String>();
 		gameboard = new Board();
 		gameboard.setConfig(config);
 	}
