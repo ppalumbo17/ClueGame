@@ -24,7 +24,7 @@ public class ClueGame {
 		this.legend = legend;
 		rooms = new HashMap<Character,String>();
 		gameboard = new Board();
-		gameboard.setConfig(config);
+		gameboard.setConfig(this.config);
 	}
 	public void loadConfigFiles(){
 		
